@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas 1 JavaScript - Luas Bangun Datar</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+            color: #555;
+        }
+
+        .hasil {
+            margin-top: 25px;
+        }
+
+        .bangun {
+            background-color: #f8f8f8;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+
+        .bangun h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Tugas pertemuan1 - JavaScript</h1>
+        <h2>Menghitung Luas Bangun Datar</h2>
+
+        <div id="hasil" class="hasil"></div>
+    </div>
+
+
+    <script>
+
+        // Fungsi untuk menghitung luas persegi panjang.
+        // Rumus: luas = panjang × lebar
+        function luasPersegiPanjang(panjang, lebar) {
+            let luas = panjang * lebar;
+            return luas;
+        }
+
+
+        // Fungsi untuk menghitung luas bujur sangkar.
+        // Rumus: luas = sisi × sisi
+        function luasBujurSangkar(sisi) {
+            let luas = sisi * sisi;
+            return luas;
+        }
+
+
+        // Fungsi untuk menghitung luas segitiga.
+        // Rumus: luas = 1/2 × alas × tinggi
+        function luasSegitiga(alas, tinggi) {
+            let luas = 0.5 * alas * tinggi;
+            return luas;
+        }
+
+
+        // Menentukan nilai parameter yang akan digunakan
+        let panjang = 10;
+        let lebar = 5;
+
+        let sisi = 6;
+
+        let alas = 8;
+        let tinggi = 10;
+
+
+        // Memanggil fungsi untuk menghitung masing-masing luas
+        let hasilPersegiPanjang = luasPersegiPanjang(panjang, lebar);
+        let hasilBujurSangkar = luasBujurSangkar(sisi);
+        let hasilSegitiga = luasSegitiga(alas, tinggi);
+
+
+        // Menampilkan hasil perhitungan ke halaman HTML
+        document.getElementById("hasil").innerHTML = `
+            <div class="bangun">
+                <h3>1. Persegi Panjang</h3>
+                <p>Panjang = ${panjang}</p>
+                <p>Lebar = ${lebar}</p>
+                <p><strong>Luas = ${hasilPersegiPanjang}</strong></p>
+            </div>
+
+            <div class="bangun">
+                <h3>2. Bujur Sangkar</h3>
+                <p>Sisi = ${sisi}</p>
+                <p><strong>Luas = ${hasilBujurSangkar}</strong></p>
+            </div>
+
+            <div class="bangun">
+                <h3>3. Segitiga</h3>
+                <p>Alas = ${alas}</p>
+                <p>Tinggi = ${tinggi}</p>
+                <p><strong>Luas = ${hasilSegitiga}</strong></p>
+            </div>
+        `;
+
+    </script>
+
+</body>
+</html>

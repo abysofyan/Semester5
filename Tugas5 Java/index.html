@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Produk</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #263238;
+        }
+
+        h2 {
+            color: #263238;
+            margin-top: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .btn-tambah {
+            background-color: #198754;
+        }
+
+        .btn-hapus {
+            background-color: #dc3545;
+        }
+
+        .btn-tampil {
+            background-color: #0d6efd;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0d6efd;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .pesan {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            th, td {
+                padding: 8px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Manajemen Produk Toko Online</h1>
+
+        <h2>Tambah Produk</h2>
+
+        <form id="formProduk">
+            <div class="form-group">
+                <label for="nama">Nama Produk</label>
+                <input type="text" id="nama" placeholder="Masukkan nama produk" required>
+            </div>
+
+            <div class="form-group">
+                <label for="harga">Harga Produk (Rp)</label>
+                <input type="number" id="harga" placeholder="Masukkan harga produk" min="1" required>
+            </div>
+
+            <button type="submit" class="btn-tambah">Tambah Produk</button>
+        </form>
+
+        <h2>Daftar Produk</h2>
+
+        <button type="button" class="btn-tampil" id="btnTampil">
+            Tampilkan Semua Produk
+        </button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nama Produk</th>
+                    <th>Harga</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+
+            <tbody id="daftarProduk"></tbody>
+        </table>
+
+        <p class="pesan" id="pesan"></p>
+    </div>
+
+    <script>
+        // Data produk awal, minimal ada 5 produk
+        let produkList = [
+            { id: 1, nama: "Laptop", harga: 12000000 },
+            { id: 2, nama: "Smartphone", harga: 5000000 },
+            { id: 3, nama: "Keyboard", harga: 350000 },
+            { id: 4, nama: "Mouse", harga: 150000 },
+            { id: 5, nama: "Monitor", harga: 2500000 }
+        ];
+
+        // Tempat untuk mengambil elemen HTML
+        const eventHandler = {
+            form: document.getElementById("formProduk"),
+            daftar: document.getElementById("daftarProduk"),
+            tombolTampil: document.getElementById("btnTampil"),
+            pesan: document.getElementById("pesan")
+        };
+
+        // Fungsi untuk menambahkan produk menggunakan Rest dan Spread Operator
+        function tambahProduk(...data) {
+            // Mengambil nilai dari data yang dikirim
+            const [id, nama, harga] = data;
+
+            const produkBaru = {
+                id: id,
+                nama: nama,
+                harga: harga
+            };
+
+            // Menambahkan produk baru ke dalam daftar
+            produkList = [...produkList, produkBaru];
+
+            eventHandler.pesan.textContent =
+                `Produk ${nama} berhasil ditambahkan.`;
+
+            tampilkanProduk();
+        }
+
+        // Fungsi untuk menghapus produk berdasarkan ID
+        function hapusProduk(id) {
+            const produk = produkList.find(item => item.id === id);
+
+            if (!produk) {
+                eventHandler.pesan.textContent = "Produk tidak ditemukan.";
+                return;
+            }
+
+            // Membuat daftar baru tanpa produk yang dipilih
+            produkList = produkList.filter(item => item.id !== id);
+
+            eventHandler.pesan.textContent =
+                `Produk ${produk.nama} berhasil dihapus.`;
+
+            tampilkanProduk();
+        }
+
+        // Fungsi untuk menampilkan semua produk menggunakan Destructuring
+        function tampilkanProduk() {
+            // Kosongkan daftar sebelum menampilkan data terbaru
+            eventHandler.daftar.innerHTML = "";
+
+            if (produkList.length === 0) {
+                eventHandler.daftar.textContent = "Belum ada produk.";
+                return;
+            }
+
+            produkList.forEach(produk => {
+                // Mengambil properti dari objek produk
+                const { id, nama, harga } = produk;
+
+                const baris = document.createElement("tr");
+
+                const kolomId = document.createElement("td");
+                kolomId.textContent = id;
+
+                const kolomNama = document.createElement("td");
+                kolomNama.textContent = nama;
+
+                const kolomHarga = document.createElement("td");
+                kolomHarga.textContent =
+                    "Rp " + harga.toLocaleString("id-ID");
+
+                const kolomAksi = document.createElement("td");
+
+                const tombolHapus = document.createElement("button");
+                tombolHapus.textContent = "Hapus";
+                tombolHapus.className = "btn-hapus";
+                tombolHapus.dataset.id = id;
+
+                kolomAksi.appendChild(tombolHapus);
+
+                baris.appendChild(kolomId);
+                baris.appendChild(kolomNama);
+                baris.appendChild(kolomHarga);
+                baris.appendChild(kolomAksi);
+
+                eventHandler.daftar.appendChild(baris);
+            });
+        }
+
+        // Event Listener untuk menambahkan produk dari form
+        eventHandler.form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const nama = document.getElementById("nama").value.trim();
+            const harga = Number(document.getElementById("harga").value);
+
+            if (nama === "" || !Number.isFinite(harga) || harga <= 0) {
+                eventHandler.pesan.textContent =
+                    "Nama dan harga produk harus diisi dengan benar.";
+                return;
+            }
+
+            // Membuat ID baru berdasarkan ID terbesar
+            const idBaru = produkList.length > 0
+                ? Math.max(...produkList.map(produk => produk.id)) + 1
+                : 1;
+
+            tambahProduk(idBaru, nama, harga);
+
+            // Mengosongkan form setelah produk ditambahkan
+            eventHandler.form.reset();
+        });
+
+        // Event Delegation untuk tombol hapus
+        eventHandler.daftar.addEventListener("click", function(event) {
+            if (event.target.classList.contains("btn-hapus")) {
+                const id = Number(event.target.dataset.id);
+                hapusProduk(id);
+            }
+        });
+
+        // Event Listener untuk tombol tampilkan semua produk
+        eventHandler.tombolTampil.addEventListener("click", function() {
+            tampilkanProduk();
+            eventHandler.pesan.textContent = "Semua produk berhasil ditampilkan.";
+        });
+
+        // Menampilkan produk saat halaman pertama kali dibuka
+        tampilkanProduk();
+    </script>
+
+</body>
+</html>

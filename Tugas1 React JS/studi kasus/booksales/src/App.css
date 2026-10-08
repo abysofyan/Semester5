@@ -1,0 +1,25 @@
+body {
+  background-color: #ffffff;
+  color: #212529;
+}
+
+a {
+  text-decoration: none;
+}
+
+.team-image {
+  height: 280px;
+  object-fit: cover;
+}
+
+.card {
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+section {
+  scroll-margin-top: 80px;
+}

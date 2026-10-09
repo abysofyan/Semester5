@@ -1,0 +1,113 @@
+
+body {
+  background-color: #ffffff;
+  color: #212529;
+}
+
+a {
+  text-decoration: none;
+}
+
+.site-header {
+  padding: 12px 0;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.navbar-brand {
+  color: #212529;
+  font-size: 1.4rem;
+  letter-spacing: -0.5px;
+}
+
+.navbar-brand:hover {
+  color: #0d6efd;
+}
+
+.nav-custom {
+  position: relative;
+  margin: 0 6px;
+  padding: 10px 16px !important;
+  border-radius: 999px;
+  color: #495057;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-custom:hover {
+  color: #0d6efd;
+  background-color: #f0f6ff;
+}
+
+.nav-custom.active {
+  color: #0d6efd;
+  background-color: #e7f1ff;
+  font-weight: 700;
+}
+
+.nav-custom.active::after {
+  content: "";
+  position: absolute;
+  bottom: 3px;
+  left: 25%;
+  width: 50%;
+  height: 2px;
+  border-radius: 2px;
+  background-color: #0d6efd;
+}
+
+.team-image {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+}
+
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.1) !important;
+}
+
+section {
+  scroll-margin-top: 80px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.footer-links a {
+  color: #ffffff;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.footer-links a:hover,
+.footer-links a.active {
+  color: #74c0fc;
+  opacity: 1;
+}
+
+@media (max-width: 991px) {
+  .nav-custom {
+    margin: 3px 0;
+  }
+
+  .nav-custom.active::after {
+    display: none;
+  }
+
+  .navbar-nav {
+    padding: 12px 0;
+  }
+
+  .footer-links {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}

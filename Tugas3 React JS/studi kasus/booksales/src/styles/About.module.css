@@ -1,0 +1,56 @@
+
+.aboutPage {
+  min-height: 65vh;
+}
+
+.aboutPage h1 {
+  color: #212529;
+}
+
+.aboutPage > section > p {
+  max-width: 650px;
+  margin-right: auto;
+  margin-left: auto;
+  line-height: 1.8;
+}
+
+.aboutImage {
+  width: 100%;
+  min-height: 320px;
+  max-height: 460px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.aboutImage:hover {
+  transform: scale(1.02);
+}
+
+.infoCard {
+  height: 100%;
+  padding: 20px;
+  border: 1px solid #e9ecef;
+  border-radius: 16px;
+  background: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.infoCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgb(0 0 0 / 7%);
+}
+
+.infoCard h3 {
+  margin-bottom: 8px;
+  font-size: 1.8rem;
+}
+
+.infoCard p {
+  font-size: 0.9rem;
+}
+
+@media (max-width: 767px) {
+  .aboutImage {
+    min-height: 240px;
+  }
+}

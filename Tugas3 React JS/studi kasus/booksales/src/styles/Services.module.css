@@ -1,0 +1,37 @@
+
+.serviceCard {
+  overflow: hidden;
+  border: 1px solid #f1f3f5 !important;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.serviceCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgb(0 0 0 / 8%) !important;
+}
+
+.serviceIcon {
+  display: inline-flex;
+  width: 64px;
+  height: 64px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  background: #e7f1ff;
+  color: #0d6efd;
+  font-size: 1.6rem;
+}
+
+.serviceCard h2 {
+  color: #212529;
+}
+
+@media (max-width: 575px) {
+  .serviceIcon {
+    width: 56px;
+    height: 56px;
+    font-size: 1.4rem;
+  }
+}
